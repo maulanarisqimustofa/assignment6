@@ -14,10 +14,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = users::all();
+        $batas = 3;
+        $data_user = users::orderBy('id', 'DESC')->paginate($batas);
+        $no = ($batas * ($data_user->currentpage()-1))+1;
   return view('user.tampil', 
-         ['user' => $user]);
-
+         ['DataUser' => $data_user, 'no'=>$no]);
     }
 
     /**
