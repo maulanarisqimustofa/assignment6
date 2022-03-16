@@ -54,7 +54,7 @@ User
     </table>
     <div>
         <ul class="pagination">
-        {{ $DataUser->links() }}
+            {{ $DataUser->links() }}
         </ul>
     </div>
 </div>

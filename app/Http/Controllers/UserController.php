@@ -16,9 +16,11 @@ class UserController extends Controller
     {
         $batas = 3;
         $data_user = users::orderBy('id', 'DESC')->paginate($batas);
-        $no = ($batas * ($data_user->currentpage()-1))+1;
-  return view('user.tampil', 
-         ['DataUser' => $data_user, 'no'=>$no]);
+        $no = ($batas * ($data_user->currentpage() - 1)) + 1;
+        return view(
+            'user.tampil',
+            ['DataUser' => $data_user, 'no' => $no]
+        );
     }
 
     /**
@@ -39,13 +41,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user= new users;
+        $user = new users;
         $user->nama = $request->nama;
         $user->email = $request->email;
         $user->save();
         return redirect('/user');
-
-
     }
 
     /**
@@ -80,10 +80,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        users::where('id',$id)
-  ->update([ 'nama' => $request->nama , 'email' => $request->email ]);
+        users::where('id', $id)
+            ->update(['nama' => $request->nama, 'email' => $request->email]);
         return redirect('/user');
-      
     }
 
     /**
@@ -94,7 +93,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user= users::find($id);
+        $user = users::find($id);
         $user->delete();
         return redirect('/user');
     }
